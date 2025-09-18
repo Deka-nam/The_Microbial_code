@@ -57,8 +57,7 @@ This unified tree is essential for a cluster to function.
 
 | Aspect | Your Local Laptop (Windows/macOS) | An HPC Cluster (Linux) |
 | :--- | :--- | :--- |
-| **How You Work** | **Interactive.** You open RStudio or PyCharm, click "run," and see results immediately on your screen. | **Batch-Oriented.** You write a script (`analysis.R`, `simulation.py`), write a job script to run it, and submit it to a queue. 
-It runs later, out of sight. |
+| **How You Work** | **Interactive.** You open RStudio or PyCharm, click "run," and see results immediately on your screen. | **Batch-Oriented.** You write a script (`analysis.R`, `simulation.py`), write a job script to run it, and submit it to a queue. It runs later, out of sight. |
 | **The Interface** | **Graphical (GUI).** You point and click. | **Command Line (CLI).** You type commands. This is the **only** way to access the HPC's power. |
 | **Resources** | Limited to what's inside your laptop (e.g., 8 CPU cores, 16GB RAM). | Vast shared resources (1000s of CPU cores, Terabytes of RAM, multiple GPUs). You request what you need. |
 | **File System** | Your local hard drive (`C:\`, `Macintosh HD`). | A massive, unified network filesystem. Your data is accessible from any node in the cluster. |
