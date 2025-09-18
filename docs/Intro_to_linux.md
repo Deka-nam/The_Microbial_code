@@ -135,13 +135,13 @@ In Linux, paths are addresses to files and directories.
   - `./script.sh` (file in current directory)
   - `../project/data.csv` (file in sibling directory)
 
-### 2. Special Directory Shortcuts
+### Special Directory Shortcuts
 - `~` (tilde) - Your home directory
 - `.` (dot) - Current directory
 - `..` (dot dot) - Parent directory
 - `-` (dash) - Previous directory
 
-### 3. File Operations Warning
+### File Operations Warning
 **Critical:** Linux command line doesn't have a "Trash" or "Recycle Bin." When you delete something with commands like `rm`, it's gone permanently. Be certain before deleting!
 
 ## Hands-On Exercises
@@ -264,3 +264,219 @@ Test your skills:
 3. Copy that file to code/
 4. Rename the copy in code/
 5. List projects/ contents without changing directories
+
+---
+
+# Module 3: The Magic of SSH - Connecting to Remote Machines
+
+## Objectives
+- Understand SSH and its importance in HPC environments
+- Learn how SSH encryption and authentication work
+- Practice generating SSH key pairs and connecting to remote servers
+- Learn basic file transfer using SCP
+
+###  What is SSH?
+
+**SSH (Secure Shell)** is a cryptographic network protocol for operating network services securely over an unsecured network. 
+
+- **Purpose:** Provides a secure channel over an unsecured network by encrypting all communication  
+- **Common Uses:**
+  - Remote command-line login
+  - Remote command execution
+  - Secure file transfer  
+- **Why It Matters for HPC:** All interaction with supercomputers and clusters happens through SSH connections  
+
+### The Client-Server Model
+
+SSH uses a client-server architecture:
+
+- **SSH Client:** Software you run on your local computer (built into Linux/macOS, needs installation on Windows)  
+- **SSH Server:** Software running on the remote machine (HPC cluster, cloud server, etc.)  
+- **Connection Process:** Your client connects to the server, negotiates encryption, and authenticates you  
+
+### Authentication Methods
+
+#### Password Authentication
+- You enter a password to connect  
+- Simple but less secure (vulnerable to brute-force attacks)  
+- Not typically used on HPC systems  
+
+#### SSH Key Authentication (Recommended)
+- Uses a pair of cryptographic keys:
+  - **Private Key:** Stored securely on your local machine (never shared!)  
+  - **Public Key:** Copied to the remote server(s) you want to access  
+- More secure and convenient (no password typing)  
+- Standard method for HPC access  
+
+## Hands-On Exercises
+
+### Prerequisites
+- Linux/macOS: Open Terminal  
+- Windows: Use WSL, Git Bash, or PowerShell with SSH client  
+- For practice, we will use a test remote server or localhost  
+
+---
+
+### Exercise 1: Generate SSH Key Pair
+
+```bash
+# Check if you already have SSH keys
+ls -la ~/.ssh/
+
+# Generate a new ED25519 key pair (recommended)
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# Or if your system does not support ED25519, use RSA:
+# ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+````
+
+**Follow the prompts:**
+
+* Press Enter to accept default file location (`~/.ssh/id_ed25519`)
+* Enter a secure passphrase (recommended for extra security)
+* Confirm your passphrase
+
+**Expected Output:**
+
+```
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/username/.ssh/id_ed25519): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/username/.ssh/id_ed25519
+Your public key has been saved in /home/username/.ssh/id_ed25519.pub
+```
+
+### Exercise 2: Examine Your SSH Keys
+
+```bash
+# List your SSH files
+ls -l ~/.ssh/
+
+# View your public key (this is what you share with servers)
+cat ~/.ssh/id_ed25519.pub
+
+# The private key should have strict permissions
+ls -l ~/.ssh/id_ed25519
+```
+
+**Important:** Your private key should have permissions `-rw-------` (read/write for owner only). If not, fix them:
+
+```bash
+chmod 600 ~/.ssh/id_ed25519
+```
+
+### Exercise 3: Practice SSH Connection
+
+#### Option A: Connect to a Practice Server
+
+```bash
+# Replace with your instructor's server details
+ssh username@training-server.example.com
+
+# If using a non-standard port (not 22):
+# ssh -p 2222 username@training-server.example.com
+```
+
+#### Option B: Connect to Your Own Machine (Localhost)
+
+```bash
+# For Linux/macOS/WSL users - SSH into your own machine
+ssh localhost
+
+# If you get "connection refused," you may need to install SSH server:
+# sudo apt update && sudo apt install openssh-server  # Ubuntu/Debian
+```
+
+### Exercise 4: SSH Configuration File (For Efficiency)
+
+Create or edit `~/.ssh/config` to simplify connections:
+
+```bash
+# Create or edit the config file
+nano ~/.ssh/config
+```
+
+Add these lines (customize for your servers):
+
+```config
+# Training server
+Host training
+    HostName training-server.example.com
+    User your_username
+    Port 22
+    
+# University HPC cluster
+Host hpc
+    HostName hpc.university.edu
+    User your_campus_username
+    IdentityFile ~/.ssh/id_ed25519
+    
+# Personal server
+Host myserver
+    HostName 123.45.67.89
+    User admin
+    Port 2222
+```
+
+Now you can connect using just the shortcut:
+
+```bash
+ssh training  # Instead of full command
+```
+
+### Exercise 5: Copy Files with SCP (Secure Copy)
+
+```bash
+# Copy local file to remote server
+scp localfile.txt training:~/remote-folder/
+
+# Copy remote file to local machine
+scp training:~/remote-file.txt ./local-folder/
+
+# Copy entire directory (recursively)
+scp -r local-dir/ training:~/remote-dir/
+```
+
+### Exercise 6: Exit SSH Sessions
+
+```bash
+# Any of these will work:
+exit
+logout
+Ctrl+D
+```
+
+## Challenge 
+
+1. **Set up passwordless login** to your practice server by copying your public key:
+
+   ```bash
+   # Method 1: Using ssh-copy-id (easiest)
+   ssh-copy-id training
+
+   # Method 2: Manual (if ssh-copy-id is not available)
+   cat ~/.ssh/id_ed25519.pub | ssh training "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+   ```
+2. **Transfer a practice file** to the server, then SSH in and verify it arrived
+3. **Create an SSH config entry** for your university's HPC system (if you have access)
+
+## Troubleshooting Common SSH Issues
+
+| Problem                            | Possible Solution                                                                |
+| ---------------------------------- | -------------------------------------------------------------------------------- |
+| "Permission denied (publickey)"    | Make sure your public key is in `~/.ssh/authorized_keys` on the server           |
+| "Connection refused"               | Check if the server is running SSH on port 22, or specify correct port with `-p` |
+| "Too many authentication failures" | Use `ssh -o IdentitiesOnly=yes server` to specify which key to use               |
+| "Host key verification failed"     | Remove the offending key from `~/.ssh/known_hosts` or update it                  |
+
+## Security Best Practices
+
+1. **Use SSH keys** instead of passwords when possible
+2. **Use a passphrase** with your SSH key for extra security
+3. **Keep your private key private** (`chmod 600`)
+4. **Use different keys** for different services/servers
+5. **Regularly update** your SSH software
+
+
+
