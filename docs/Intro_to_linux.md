@@ -219,7 +219,7 @@ mv file2.txt subfolder/
 ls -l subfolder/
 ```
 
-### Exercise 4: Sade deletion
+### Exercise 4: File deletion
 ```bash
 # Remove a file (be careful!)
 rm renamed_file.txt
@@ -469,13 +469,6 @@ Ctrl+D
 | "Too many authentication failures" | Use `ssh -o IdentitiesOnly=yes server` to specify which key to use               |
 | "Host key verification failed"     | Remove the offending key from `~/.ssh/known_hosts` or update it                  |
 
-## Security Best Practices
-
-1. **Use SSH keys** instead of passwords when possible
-2. **Use a passphrase** with your SSH key for extra security
-3. **Keep your private key private** (`chmod 600`)
-4. **Use different keys** for different services/servers
-5. **Regularly update** your SSH software
 
 
 
