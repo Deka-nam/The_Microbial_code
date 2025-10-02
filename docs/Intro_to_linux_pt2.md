@@ -238,9 +238,9 @@ EOF
 ```
 <details> <summary>Click to view solution</summary>
 
-#### 1. Check file size
+### 1. Check file size
 ls -lh challenge.fasta
-# or
+### or
 wc -c challenge.fasta
 
 ### 2. Count sequences
