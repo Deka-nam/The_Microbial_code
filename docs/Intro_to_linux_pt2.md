@@ -238,32 +238,32 @@ EOF
 ```
 <details> <summary>Click to view solution</summary>
 
-### 1. Check file size
-ls -lh challenge.fasta
-### or
-wc -c challenge.fasta
+#### 1. Check file size
+`ls -lh challenge.fasta`
+#### or
+`wc -c challenge.fasta`
 
-### 2. Count sequences
-grep -c ">" challenge.fasta
+#### 2. Count sequences
+`grep -c ">" challenge.fasta`
 
-### 3. Find sequences from chromosome 1
-grep "chromosome:1" challenge.fasta
+#### 3. Find sequences from chromosome 1
+`grep "chromosome:1" challenge.fasta`
 
-### 4. Extract just headers
-grep ">" challenge.fasta > headers_report.txt
-cat headers_report.txt
+#### 4. Extract just headers
+`grep ">" challenge.fasta > headers_report.txt
+cat headers_report.txt`
 
 #### 5. Find sequences with ATGSTART motif
-grep -B1 "ATGSTART" challenge.fasta
+`grep -B1 "ATGSTART" challenge.fasta`
 
-### or to see just the headers of sequences containing the motif
-grep "ATGSTART" challenge.fasta | grep -o ">.*" 
+#### or to see just the headers of sequences containing the motif
+`grep "ATGSTART" challenge.fasta | grep -o ">.*"` 
 </details>
 
 
 
 ## Pro Tips for Bioinformatics Workflows
-1. Always check your data first with head, wc, ls -lh before running analyses
+1. Always check your data first with `head`, `wc`, `ls -lh` before running analyses
 2. Use compression for large files to save disk space and transfer time
 3. Chain commands with pipes to build powerful one-liners
 4. Redirect output to files to save results and create reports
