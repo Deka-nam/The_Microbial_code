@@ -222,8 +222,8 @@ done
 | No output | Check input file paths and formats |
 | Low N50 | Check coverage, consider read normalization |
 
-Complete [SPAdes documentation](https://github.com/ablab/spades/tree/main/docs)
-[Complete Spades user manual](https://ablab.github.io/spades/)
+- Complete [SPAdes documentation](https://github.com/ablab/spades/tree/main/docs)
+- Complete [Spades user manual](https://ablab.github.io/spades/)
 
 ## Reference: 
 Bankevich, A., et al., SPAdes: a new genome assembly algorithm and its applications to single-cell sequencing. J Comput Biol, 2012. 19(5): p. 455-77.
