@@ -5,7 +5,7 @@
 - **Goal**: Demystify the command line. Students should leave feeling capable of logging into a remote machine, navigating its file system, performing basic operations, and understanding how to run a simple job.
 - **Motto**: Don't memorize commands; understand the concepts. You can always Google the syntax.
 
-## 4 Modules (1-2 hours total)
+## 3 Modules (1-2 hours total)
 ## Module 1: The Why and The How - Foundations & First Steps 
 
 ### What is Linux? 
