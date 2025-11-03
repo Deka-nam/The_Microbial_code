@@ -91,7 +91,7 @@ gut_isolates/
    ````
 
 4. **Follow the main exercise instructions**
-   See [`16SrRNA_detailed_steps.md`]([exercise_protocol.md](https://github.com/Deka-nam/The_Microbial_code/blob/main/Project_management/Practice_project1/16SrRNA_detailed_steps.md)) for detailed step-by-step commands.
+   See [16SrRNA_detailed_steps.md](https://github.com/Deka-nam/The_Microbial_code/blob/main/Project_management/Practice_project1/16SrRNA_detailed_steps.md) for detailed step-by-step commands.
 
 5. **Expected Outputs**
 
@@ -136,11 +136,11 @@ Google Co-pilot to refine commands/markdown.
 * Edgar RC. (2004). *MUSCLE: Multiple sequence alignment with high accuracy and high throughput.*
 
 ## Input References 
-- input1: SRR2584863 — Escherichia coli (LTEE), Illumina, PE 150 bp
-- input2: SRR2584866 — Escherichia coli (LTEE), Illumina, PE 150 bp
-- input3: SRR2589044 — Escherichia coli (LTEE), Illumina, paired 
-- input4: SRR801268 — Salmonella enterica Typhimurium, Illumina GAIIx paired-end
-- input5: SRR1501128 — Klebsiella pneumoniae KPNIH24, Illumina MiSeq Genomic Paired-end Library
+- input1: SRR2584863 — *Escherichia coli* (LTEE), Illumina, PE 150 bp
+- input2: SRR2584866 — *Escherichia coli* (LTEE), Illumina, PE 150 bp
+- input3: SRR2589044 — *Escherichia coli* (LTEE), Illumina, paired 
+- input4: SRR801268 — *Salmonella enterica Typhimurium*, Illumina GAIIx paired-end
+- input5: SRR1501128 — *Klebsiella pneumoniae* KPNIH24, Illumina MiSeq Genomic Paired-end Library
 
 ### Download: SRA Toolkit
 ```bash
