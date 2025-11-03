@@ -91,7 +91,7 @@ gut_isolates/
    ````
 
 4. **Follow the main exercise instructions**
-   See [`exercise_protocol.md`](exercise_protocol.md) for detailed step-by-step commands.
+   See [`16SrRNA_detailed_steps.md`]([exercise_protocol.md](https://github.com/Deka-nam/The_Microbial_code/blob/main/Project_management/Practice_project1/16SrRNA_detailed_steps.md)) for detailed step-by-step commands.
 
 5. **Expected Outputs**
 
